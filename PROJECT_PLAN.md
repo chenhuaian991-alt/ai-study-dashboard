@@ -2,11 +2,22 @@
 
 ## 当前阶段
 
-阶段 0：项目启动与规则建立。
+v0.2 已完成开发并通过手动验收，待提交 GitHub。
 
-本阶段只创建项目说明和 AI 协作规则，不初始化前端项目，不安装依赖，不创建业务代码。
+### v0.1 已完成（已提交 GitHub）
 
-阶段 1 从初始化 Vite + React + TypeScript 项目开始，目标是得到一个能运行的空壳项目、基础目录结构和核心类型定义。
+- 任务看板、任务 CRUD、状态切换
+- AI 编程日志、每日复盘
+- localStorage 持久化、JSON 导入导出
+
+### v0.2 已完成（已验收）
+
+- 首页概览 Dashboard（今日到期、逾期、进行中、最近日志/复盘）
+- 日期工具稳定化（YYYY-MM-DD 字典序比较、ISO datetime 本地日期、本地 todayStr）
+- 任务搜索与筛选（关键词 AND 逻辑、状态、优先级、课程、清空筛选、结果计数、无匹配提示）
+- 搜索范围优化（仅匹配标题和课程，不匹配 resourceLink）
+- 课程筛选悬空修复
+- 文档更新（README、DEVLOG、MANUAL_TEST_CHECKLIST）
 
 ## 项目目标
 
@@ -80,4 +91,4 @@
 
 ## 当前下一步
 
-请让 Claude Code 阅读 README.md、PROJECT_PLAN.md、AGENTS.md 和 CLAUDE.md，然后只做文档确认与下一步计划，不要立刻初始化项目。
+提交 v0.2 到 GitHub。之后可进入 v0.3 规划。

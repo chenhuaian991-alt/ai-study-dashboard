@@ -1,6 +1,6 @@
 .app-header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .app-header h1 {
@@ -14,8 +14,225 @@
   font-size: 14px;
 }
 
+/* ---- Navigation ---- */
+
+.app-nav {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.nav-tab {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.nav-tab:hover {
+  color: var(--color-text);
+}
+
+.nav-tab--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* ---- Dashboard ---- */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dashboard-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.dashboard-card--urgent {
+  border-color: #fde68a;
+}
+
+.dashboard-card--overdue {
+  border-color: #fca5a5;
+}
+
+.dashboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.dashboard-card-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.dashboard-card-body {
+  padding: 10px 14px;
+}
+
+.dashboard-empty {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  padding: 16px 0;
+}
+
+.dashboard-task-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-task-row:last-child {
+  border-bottom: none;
+}
+
+.dashboard-task-title {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.dashboard-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  align-items: center;
+}
+
+.dashboard-log-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-log-row:last-child {
+  border-bottom: none;
+}
+
+.dashboard-log-title {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.dashboard-log-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  align-items: center;
+}
+
+.dashboard-review-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-review-row:last-child {
+  border-bottom: none;
+}
+
+.dashboard-review-date {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.dashboard-review-preview {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
 .section {
   margin-bottom: 32px;
+}
+
+/* ---- Task Filter ---- */
+
+.task-filter {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.task-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.task-filter-field input,
+.task-filter-field select {
+  font-size: 13px;
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.task-filter-field input {
+  min-width: 180px;
+}
+
+.task-filter-field input:focus,
+.task-filter-field select:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: -1px;
+  border-color: var(--color-primary);
+}
+
+.task-filter-clear {
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.task-filter-clear:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.task-filter-info {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
 }
 
 /* ---- Board ---- */
@@ -833,6 +1050,14 @@
   }
 
   .review-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-bottom {
     grid-template-columns: 1fr;
   }
 }

@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { createDailyReview } from './reviewStorage';
+import { todayStr } from '../../utils/date';
 
 interface ReviewFormProps {
   onCreated: () => void;
-}
-
-function todayStr(): string {
-  return new Date().toISOString().slice(0, 10);
 }
 
 export function ReviewForm({ onCreated }: ReviewFormProps) {
