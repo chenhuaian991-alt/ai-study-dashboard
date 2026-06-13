@@ -30,6 +30,17 @@ export interface AiLog {
   updatedAt: string;
 }
 
+export interface AiReviewSummary {
+  id: string;
+  title: string;
+  sourceLogCount: number;
+  sourceLogIds: string[];
+  summary: string;
+  actionItems: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface DailyReview {
   id: string;
   date: string;

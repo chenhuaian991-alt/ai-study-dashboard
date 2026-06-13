@@ -4,6 +4,10 @@ import { getDailyReviews } from '../reviews/reviewStorage';
 import { isToday, isBeforeToday, formatDate } from '../../utils/date';
 import type { Task, AiLog, DailyReview } from '../../types';
 
+interface DashboardProps {
+  onNavigate?: (section: 'tasks' | 'logs' | 'reviews') => void;
+}
+
 const RECENT_LIMIT = 3;
 
 const priorityLabel: Record<string, string> = {
@@ -34,7 +38,7 @@ function getInProgress(tasks: Task[]): Task[] {
   return tasks.filter((t) => t.status === 'in-progress');
 }
 
-export function Dashboard() {
+export function Dashboard({ onNavigate }: DashboardProps) {
   const tasks = getTasks();
   const logs = getAiLogs();
   const reviews = getDailyReviews();
@@ -58,6 +62,11 @@ export function Dashboard() {
           <div className="dashboard-card-header">
             <h3>今日到期</h3>
             <span className="task-count">{dueToday.length}</span>
+            {onNavigate && (
+              <button type="button" className="dashboard-jump-btn" onClick={() => onNavigate('tasks')}>
+                查看全部 →
+              </button>
+            )}
           </div>
           <div className="dashboard-card-body">
             {dueToday.length === 0 ? (
@@ -72,6 +81,11 @@ export function Dashboard() {
           <div className="dashboard-card-header">
             <h3>已逾期</h3>
             <span className="task-count">{overdue.length}</span>
+            {onNavigate && (
+              <button type="button" className="dashboard-jump-btn" onClick={() => onNavigate('tasks')}>
+                查看全部 →
+              </button>
+            )}
           </div>
           <div className="dashboard-card-body">
             {overdue.length === 0 ? (
@@ -86,6 +100,11 @@ export function Dashboard() {
           <div className="dashboard-card-header">
             <h3>进行中</h3>
             <span className="task-count">{inProgress.length}</span>
+            {onNavigate && (
+              <button type="button" className="dashboard-jump-btn" onClick={() => onNavigate('tasks')}>
+                查看全部 →
+              </button>
+            )}
           </div>
           <div className="dashboard-card-body">
             {inProgress.length === 0 ? (
@@ -101,6 +120,11 @@ export function Dashboard() {
         <div className="dashboard-card">
           <div className="dashboard-card-header">
             <h3>最近 AI 编程日志</h3>
+            {onNavigate && (
+              <button type="button" className="dashboard-jump-btn" onClick={() => onNavigate('logs')}>
+                查看全部 →
+              </button>
+            )}
           </div>
           <div className="dashboard-card-body">
             {recentLogs.length === 0 ? (
@@ -114,6 +138,11 @@ export function Dashboard() {
         <div className="dashboard-card">
           <div className="dashboard-card-header">
             <h3>最近每日复盘</h3>
+            {onNavigate && (
+              <button type="button" className="dashboard-jump-btn" onClick={() => onNavigate('reviews')}>
+                查看全部 →
+              </button>
+            )}
           </div>
           <div className="dashboard-card-body">
             {recentReviews.length === 0 ? (

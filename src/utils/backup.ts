@@ -1,6 +1,7 @@
-import type { Task, AiLog, DailyReview } from '../types';
+import type { Task, AiLog, DailyReview, AiReviewSummary } from '../types';
 import { STORAGE_KEYS } from './storageKeys';
 import { loadFromStorage, saveToStorage } from './storage';
+import { normalizeAiReviewSummary } from '../features/logs/reviewSummaryStorage';
 
 interface BackupData {
   version: number;
@@ -8,6 +9,7 @@ interface BackupData {
   tasks: Task[];
   aiLogs: AiLog[];
   dailyReviews: DailyReview[];
+  aiReviewSummaries: AiReviewSummary[];
 }
 
 export function exportBackup(): string {
@@ -17,6 +19,7 @@ export function exportBackup(): string {
     tasks: loadFromStorage<Task[]>(STORAGE_KEYS.TASKS, []),
     aiLogs: loadFromStorage<AiLog[]>(STORAGE_KEYS.AI_LOGS, []),
     dailyReviews: loadFromStorage<DailyReview[]>(STORAGE_KEYS.DAILY_REVIEWS, []),
+    aiReviewSummaries: loadFromStorage<AiReviewSummary[]>(STORAGE_KEYS.AI_REVIEW_SUMMARIES, []).map(normalizeAiReviewSummary),
   };
   return JSON.stringify(data, null, 2);
 }
@@ -48,6 +51,11 @@ export function importBackup(jsonText: string): { ok: true } | { ok: false; mess
   saveToStorage(STORAGE_KEYS.TASKS, obj.tasks as Task[]);
   saveToStorage(STORAGE_KEYS.AI_LOGS, obj.aiLogs as AiLog[]);
   saveToStorage(STORAGE_KEYS.DAILY_REVIEWS, obj.dailyReviews as DailyReview[]);
+
+  const aiReviewSummaries = Array.isArray(obj.aiReviewSummaries)
+    ? (obj.aiReviewSummaries as AiReviewSummary[]).map(normalizeAiReviewSummary)
+    : [];
+  saveToStorage(STORAGE_KEYS.AI_REVIEW_SUMMARIES, aiReviewSummaries);
 
   return { ok: true };
 }

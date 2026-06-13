@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import './App.css'
 import { Dashboard } from './features/dashboard/Dashboard'
 import { TaskBoard } from './features/tasks/TaskBoard'
@@ -10,6 +10,14 @@ type Tab = 'dashboard' | 'manage'
 
 function App() {
   const [tab, setTab] = useState<Tab>('dashboard')
+
+  const handleNavigate = useCallback((section: 'tasks' | 'logs' | 'reviews') => {
+    setTab('manage')
+    requestAnimationFrame(() => {
+      const el = document.getElementById(`section-${section}`)
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }, [])
 
   return (
     <>
@@ -33,19 +41,19 @@ function App() {
         </button>
       </nav>
 
-      {tab === 'dashboard' && <Dashboard />}
+      {tab === 'dashboard' && <Dashboard onNavigate={handleNavigate} />}
 
       {tab === 'manage' && (
         <>
-          <section className="section">
+          <section id="section-tasks" className="section">
             <TaskBoard />
           </section>
 
-          <section className="section">
+          <section id="section-logs" className="section">
             <LogPanel />
           </section>
 
-          <section className="section">
+          <section id="section-reviews" className="section">
             <ReviewPanel />
           </section>
 

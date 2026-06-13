@@ -1,31 +1,26 @@
-# CONTEXT.md
+# 对话上下文存档
+> 上次更新：2026-06-13 21:10（Asia/Shanghai）
 
-当前任务：v0.2 已完成开发并通过手动验收，待提交 GitHub。
+## 当前任务
+v0.3.1「AI 协作复盘增强体验修正」已完成阶段收尾，待提交前整理。
 
-已完成：
-- 首页概览 Dashboard（今日到期、逾期、进行中、最近日志/复盘）
-- 日期工具稳定化（YYYY-MM-DD 字典序比较、ISO datetime 本地日期、本地 todayStr）
-- 任务搜索与筛选（关键词 AND 逻辑、状态、优先级、课程、清空筛选、无匹配提示）
-- 搜索范围优化（仅匹配标题和课程，不匹配 resourceLink）
-- 课程筛选悬空修复
-- 文档更新（README、DEVLOG、MANUAL_TEST_CHECKLIST）
+## 已完成
+- 修复摘要换行、日志筛选隔离、来源日志绑定、首页跳转、AI 日志页锚点导航。
+- `AiReviewSummary` 增加 `sourceLogIds`，备份导入/导出兼容旧摘要。
+- Codex review 通过，Chrome 自动验收通过，`npm run build` 通过。
 
-待办：
-- 提交 v0.2 到 GitHub
-- 后续可考虑 v0.3 规划
+## 待办
+- 如需要，清理浏览器 localStorage 中自动验收测试数据。
+- 提交 v0.3.1 到 GitHub，然后再规划 v0.4。
 
-关键决策：
-- 不做后端/数据库/云同步/AI API
-- v0.2 控制在本地体验增强，不引入新依赖
-- 搜索不匹配 resourceLink，避免数字误命中
+## 关键决策
+- 不接入 AI API，不引入第三方库，不做侧边栏或路由重构。
+- 页内定位改用原生锚点，避免 `scrollIntoView` 点击不稳定。
 
-问题记录：
-- JSON 导入字段校验不足（异常 status 可通过）
-- 筛选逻辑缺少自动测试
+## 问题记录
+- Vite 在沙箱内常因 spawn EPERM 失败，提升权限后 build/dev 可运行。
 
-关键文件：
-- src/features/dashboard/Dashboard.tsx
-- src/utils/date.ts
-- src/features/tasks/TaskBoard.tsx
-- src/features/tasks/TaskFilter.tsx
-- src/features/reviews/ReviewForm.tsx
+## 关键文件
+- src/features/logs/LogPanel.tsx - 日志页筛选、复盘材料、锚点导航
+- src/features/logs/reviewSummaryStorage.ts - AI 复盘摘要 normalize 与 storage
+- src/utils/backup.ts - JSON 备份导入导出兼容

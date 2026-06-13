@@ -42,7 +42,7 @@ export function BackupPanel() {
       return;
     }
 
-    if (!window.confirm('导入会覆盖当前所有数据（任务、日志、复盘），确定继续吗？')) {
+    if (!window.confirm('导入会覆盖当前所有数据（任务、日志、复盘、AI 复盘摘要），确定继续吗？')) {
       return;
     }
 

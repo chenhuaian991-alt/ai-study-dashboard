@@ -111,6 +111,48 @@
 - JSON 导入仍可能接受字段异常的数据（如异常 status），后续可增强导入校验
 - 筛选逻辑目前靠手动验收，暂未补自动测试
 
+## v0.3 完成内容
+
+### AI 协作复盘增强
+- 日志筛选：关键词搜索（匹配 title/prompt/result/lesson）、工具筛选（全部/Claude/Codex/Other）、状态筛选（全部/成功/部分成功/失败）、重置筛选、结果计数
+- 复盘材料预览：根据筛选结果自动生成 Markdown，包含范围说明、每条日志详情、给 AI 的总结请求
+- 一键复制复盘材料：navigator.clipboard.writeText，失败时保留预览供手动复制
+- AI 复盘摘要保存：标题+AI 总结必填，下次行动可选，localStorage 持久化
+- 摘要查看与删除：卡片展示，删除前二次确认
+- JSON 备份兼容：导出/导入包含 aiReviewSummaries，旧备份导入兼容（缺失字段按空数组处理）
+- 无日志时已保存摘要仍可见
+
+### 新增文件
+- src/features/logs/reviewSummaryStorage.ts（摘要 CRUD）
+- src/features/logs/LogFilter.tsx（日志筛选组件）
+- src/features/logs/LogReviewDraft.tsx（Markdown 复盘材料预览+复制）
+- src/features/logs/ReviewSummaryForm.tsx（摘要保存表单）
+- src/features/logs/ReviewSummaryCard.tsx（摘要卡片）
+- src/features/logs/ReviewSummaryList.tsx（摘要列表）
+
+### 修改文件
+- src/types/index.ts（新增 AiReviewSummary 接口）
+- src/utils/storageKeys.ts（新增 AI_REVIEW_SUMMARIES key）
+- src/features/logs/LogPanel.tsx（接入筛选、复盘材料、摘要表单和列表）
+- src/utils/backup.ts（备份包含 aiReviewSummaries，导入兼容旧格式）
+- src/features/backup/BackupPanel.tsx（确认文案补充 AI 复盘摘要）
+- src/App.css（新增筛选、复盘材料、摘要样式）
+
+### Codex 审查结论
+- 未发现阻断问题
+- P1 已修复：JSON 备份包含 AI 复盘摘要
+- P2 已修复：无日志时摘要仍可见
+- P3 已补充：MANUAL_TEST_CHECKLIST.md 增加 v0.3 手动测试说明
+
+### 验证结果
+- npm run build 通过
+- 手动测试待执行
+
+### 经验
+- 筛选和 Markdown 生成都是 UI 层派生数据，不改底层 storage，保持数据层稳定
+- 新增数据类型用独立 storage 模块，与现有 AiLog 解耦
+- 备份兼容需要考虑旧格式缺失字段的情况
+
 ## 下一版可以考虑的功能
 
 - 任务拖拽排序
@@ -120,3 +162,22 @@
 - 周报/月报
 - 暗色模式
 - 移动端适配优化
+
+## v0.3.1 阶段收尾
+
+### 完成内容
+- 修复 AI 复盘摘要显示：摘要和下次行动使用保留换行的展示方式，适合粘贴多段 AI 回复。
+- 调整日志筛选用途：筛选结果只影响复盘材料和摘要来源，不再干扰正常日志列表查看。
+- 增强 AI 复盘摘要关联：`AiReviewSummary` 增加 `sourceLogIds`，摘要卡片可显示来源日志；旧数据缺失字段时按空数组兼容。
+- 优化页面动线：首页概览增加任务、日志、复盘跳转入口；AI 日志页增加新增日志、复盘材料、日志列表、已保存复盘的页内锚点导航。
+- 完善备份兼容：导入和导出都会 normalize AI 复盘摘要，保证旧摘要导出时也补齐 `sourceLogIds`。
+
+### 验证结果
+- `npm run build` 通过。
+- Codex review 两轮通过，最后一轮未发现 P0/P1/P2/P3 问题。
+- Chrome 自动验收通过：快捷锚点定位、日志筛选隔离、多段摘要换行、来源日志展示、备份 JSON 中 `sourceLogIds` 均正常。
+
+### 经验
+- 小版本修正应优先围绕用户验收暴露的问题闭环，不急着进入大重构。
+- 页内定位这类轻量交互优先使用原生锚点，比自写 `scrollIntoView` 按钮更稳定。
+- localStorage 数据结构演进要同时考虑读取、导入、导出三条路径的兼容一致性。

@@ -573,6 +573,36 @@
   margin-bottom: 16px;
 }
 
+.log-quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.log-quick-nav a {
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.log-quick-nav a:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+#log-form-section,
+#log-review-section,
+#log-list-section,
+#review-summary-section {
+  scroll-margin-top: 16px;
+}
+
 .log-empty {
   text-align: center;
   color: var(--color-text-secondary);
@@ -662,6 +692,342 @@
 
 .log-form-submit:hover {
   opacity: 0.9;
+}
+
+/* ---- Log Filter ---- */
+
+.log-filter {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 16px 0;
+  background: var(--color-bg);
+}
+
+.log-filter-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.log-filter-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.log-filter-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(140px, 180px) minmax(140px, 180px) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.log-filter-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.log-filter-controls input,
+.log-filter-controls select {
+  min-height: 38px;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.log-filter-controls input:focus,
+.log-filter-controls select:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: -1px;
+  border-color: var(--color-primary);
+}
+
+.log-filter-controls button {
+  min-height: 38px;
+  font-size: 13px;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.log-filter-controls button:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+@media (max-width: 760px) {
+  .log-filter-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Log Review Draft ---- */
+
+.log-review-draft {
+  border: 1px solid #dbeafe;
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 16px 0;
+  background: #eff6ff;
+}
+
+.log-review-draft-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.log-review-draft-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.log-review-draft-header button {
+  font-size: 13px;
+  padding: 6px 14px;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+.log-review-draft-header button:hover {
+  background: #bfdbfe;
+}
+
+.log-review-draft textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  line-height: 1.5;
+  font-size: 12px;
+  padding: 10px;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.log-review-message {
+  margin: 8px 0 0;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---- Review Summary ---- */
+
+.review-summary-form {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 16px 0;
+  background: var(--color-surface);
+}
+
+.review-summary-form h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.review-summary-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.review-summary-form input,
+.review-summary-form textarea {
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.review-summary-form input:focus,
+.review-summary-form textarea:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: -1px;
+  border-color: var(--color-primary);
+}
+
+.review-summary-form textarea {
+  resize: vertical;
+}
+
+.review-summary-form > button[type="submit"] {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 20px;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+.review-summary-form > button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+.review-summary-list {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.review-summary-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--color-surface);
+}
+
+.review-summary-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.review-summary-card-header h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.review-summary-card-header span,
+.review-summary-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.review-summary-card strong {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.review-summary-card p {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.review-summary-delete {
+  font-size: 12px;
+  padding: 3px 10px;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  background: #fff1f2;
+  color: #b91c1c;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.review-summary-delete:hover {
+  background: #fee2e2;
+}
+
+.review-summary-empty {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin: 16px 0;
+}
+
+.review-summary-title-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.review-summary-title-row input {
+  flex: 1;
+}
+
+.title-suggest-btn {
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.title-suggest-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.review-summary-text {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+.review-summary-source-logs {
+  margin-bottom: 10px;
+}
+
+.review-summary-source-logs strong {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.review-summary-source-logs ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.review-summary-source-logs li {
+  margin-bottom: 2px;
+}
+
+.review-summary-source-missing {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.dashboard-jump-btn {
+  font-size: 12px;
+  padding: 2px 8px;
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dashboard-jump-btn:hover {
+  text-decoration: underline;
 }
 
 /* ---- Log Card ---- */
