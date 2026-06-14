@@ -153,6 +153,38 @@
 - 新增数据类型用独立 storage 模块，与现有 AiLog 解耦
 - 备份兼容需要考虑旧格式缺失字段的情况
 
+## v0.4 完成内容
+
+### 本周回顾与学习统计
+- 新增周日期工具 `src/utils/week.ts`：`getCurrentWeekRange()`（周一–周日）、`isDateInRange()`、`formatDateRange()`
+- 新增 `WeeklyReport` 组件，放在 Dashboard 底部
+- 五个统计卡片：完成任务、新增任务、AI 日志、每日复盘、复盘摘要
+- 本周完成任务列表（标题+课程）
+- 本周 AI 协作记录列表（标题+工具+状态）
+- Markdown 周报草稿：包含统计、完成任务、新增任务、AI 协作记录、每日复盘详情、复盘摘要
+- 复制周报草稿按钮：成功显示"已复制"，失败显示"复制失败，请手动选择"
+
+### 新增文件
+- src/utils/week.ts（周日期工具）
+- src/features/dashboard/WeeklyReport.tsx（本周回顾组件）
+
+### 修改文件
+- src/features/dashboard/Dashboard.tsx（导入并渲染 WeeklyReport）
+- src/App.css（新增 weekly-report 相关样式约 100 行）
+
+### Codex 审查结论
+- P2 已修复：复制失败时有可见提示，textarea 保留手动复制兜底
+- P2 已修复：Markdown 周报补充新增任务列表和每日复盘详情
+
+### 验证结果
+- `npm run build` 通过
+- Playwright MCP 浏览器验收通过
+
+### 经验
+- 统计基于现有 storage 数据派生，不改底层数据结构
+- 复制功能需要 try/catch 兜底，clipboard API 在部分环境不可用
+- 周报 Markdown 应尽量包含完整上下文
+
 ## 下一版可以考虑的功能
 
 - 任务拖拽排序
