@@ -2,6 +2,7 @@ import { getTasks } from '../tasks/taskStorage';
 import { getAiLogs } from '../logs/logStorage';
 import { getDailyReviews } from '../reviews/reviewStorage';
 import { isToday, isBeforeToday, formatDate } from '../../utils/date';
+import { WeeklyReport } from './WeeklyReport';
 import type { Task, AiLog, DailyReview } from '../../types';
 
 interface DashboardProps {
@@ -153,6 +154,8 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           </div>
         </div>
       </div>
+
+      <WeeklyReport />
     </div>
   );
 }

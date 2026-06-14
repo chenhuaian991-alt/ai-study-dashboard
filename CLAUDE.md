@@ -1,5 +1,35 @@
 # CLAUDE.md
 
+## 当前强化规则（v0.3.1 后）
+
+当前项目状态：v0.3.1「AI 协作复盘增强体验修正」已完成、通过 Codex review、Chrome 自动验收和 `npm run build`，并已提交 GitHub。下一步通常是进入 v0.4 规划；Claude Code 不应自行扩大版本范围。
+
+Claude Code 的推荐定位：
+
+- **Claude-Fix**：根据 Codex review 或用户明确指出的问题做最小修复。
+- **Claude-Feature**：根据项目经理/Codex 给出的实现 prompt 完成一个明确功能。
+- **Claude-QA**：根据验收清单使用 Playwright MCP 做浏览器验收，不主动改代码。
+
+涉及用户可见 UI 的修改，完成后必须使用 Playwright MCP 做浏览器验收，不能只运行 `npm run build`。浏览器验收规则见 `docs/CLAUDE_BROWSER_TESTING.md`。
+
+实现任务标准流程：
+
+1. 阅读 `AGENTS.md`、`CLAUDE.md`、`PROJECT_PLAN.md`、`README.md`、`DEVLOG.md`、`CONTEXT.md`。
+2. 复述本次任务范围和明确非目标。
+3. 修改代码，保持现有 React + TypeScript + CSS + localStorage 架构。
+4. 运行 `npm run build`。
+5. 如果涉及 UI，启动本地 dev server，并用 Playwright MCP 验证关键路径。
+6. 汇报改动文件、实现内容、build 结果、浏览器验收结果、未完成事项和风险。
+
+Playwright MCP 推荐使用：
+
+- `browser_navigate` 打开 `http://127.0.0.1:5173`
+- `browser_snapshot` 观察页面结构
+- `browser_click`、`browser_fill_form`、`browser_type`、`browser_select_option`、`browser_press_key` 进行交互
+- `browser_wait_for` 等待状态变化
+- `browser_console_messages` 检查控制台错误
+- `browser_take_screenshot` 在 UI 布局或视觉问题需要证据时截图
+
 ## Claude Code 工作方式
 
 Claude Code 是本项目的主要代码实现助手，负责根据明确提示词完成代码修改、常规 bug 修复、基础验证和项目内小问题解答。
@@ -107,3 +137,8 @@ v0.1 MVP 已完成，并已提交 GitHub。
 - 覆盖写入 CONTEXT.md
 - 必要时更新 README.md
 - 不自动提交 git，除非用户明确要求
+## 当前状态规则
+
+项目状态以 `CONTEXT.md` 和 `PROJECT_PLAN.md` 为准。旧章节中关于 v0.1/v0.2 的“当前状态”只作为历史记录，不应覆盖最新上下文。
+
+涉及 UI 的实现任务，Claude Code 必须按 `docs/CLAUDE_BROWSER_TESTING.md` 使用 Playwright MCP 做浏览器验收；Mimo 模型没有可靠识图能力，验收证据以 DOM、文本、URL/hash、computed style、console 和表单状态为主。
